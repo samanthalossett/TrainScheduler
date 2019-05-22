@@ -3,7 +3,7 @@
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Link CSS -->
@@ -11,6 +11,9 @@
     <!-- Link bootstrap-->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- FIREBASE link-->
+        <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script>
+      
 
     <title>Train Scheduler</title>
 
@@ -18,16 +21,16 @@
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <h1 class="display-4">Train Scheduler</h1>
-                <p class="lead">It's not 9 3/4 but it will do....</p>
+                <!-- <p class="lead">It's not 9 3/4 but it will do....</p> -->
             </div>
         </div>
     </head>
 </head>
 
 <body>
-    <!-- CARD -->
+    <!-- CARD that displays the train schedules after input-->
     <div class="card-body">
-        <h3 class="card-title">Train Schedules</h3>
+        <h3 class="card-header">Train Schedules</h3>
         <table class="table table-sm">
             <thead>
                 <tr>
@@ -63,44 +66,45 @@
         </table>
     </div>
     <br></br>
-    <!--FORM-->
+    <!--FORM to enter/ look up train times-->
     <form>
         <div class="entire-submit-form">
-            <h4 class="entire-form-title">Add Train</h4>
+            <h4 class="card-header">Add Train</h4>
 
             <div class="form-group">
                 <label for="train-name">Train Name</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-
+                <input type="text" class="form-control" id="name-input" aria-describedby="trainName">
             </div>
             <div class="form-group">
                 <label for="destination">Destination</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input type="text" class="form-control" id="destination-input">
             </div>
             <div class="form-group">
-                <label for="first-train-time">First Train Time (HH:mm - military time</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <label for="first-train-time">First Train Time (HH:mm - military time)</label>
+                <input type="number" class="form-control" id="trainTime-input">
             </div>
             <div class="form-group">
                     <label for="frequency">Frequency</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input type="text" class="form-control" id="frequency-input">
                 </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" id="submit" class="btn btn-primary">Submit</button>
     </form>
     </div>
 
-
-
-
     <br></br>
-    <!--keep at bottom?-->
+
+   
+
+                                <!--keep at bottom?-->
     <!--Moment.js link-->
-    <script src=https://momentjs.com/downloads/moment.js> </script> <!--jquery link-->
+    <script src=https://momentjs.com/downloads/moment.js> </script> 
+    <!--jquery link-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <!--popper.js link-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-        crossorigin="anonymous"></script>
+    <!-- Link to FIREBASE -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/4.12.0/firebase.js"></script> -->
+    <!-- link to Javascript -->
+    <script src="assets/javascript/app.js"></script>   
+  
 
 </body>
 
