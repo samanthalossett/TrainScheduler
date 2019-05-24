@@ -28,54 +28,35 @@ $("#submit").on("click", function (event) {
     time = $("#trainTime-input").val().trim();
     frequency = $("#frequency-input").val().trim();
 
-    database.ref().set({
-        name: name,
-        destination: destination,
-        time: time,
-        frequency: frequency
-    });
-    $("#tbody").append(newRow);
-
+    if (name === "" || destination === "" || time === "" || frequency === "") {
+        alert ("Please fill in the blanks");
+    }
+    else{
+        
+            database.ref().push({
+                name,
+                destination,
+                time,
+                frequency
+            });
+        }
 });
-// Firebase watcher + initial loader HINT: .on("value")
 
-database.ref().on("value", function (snapshot) {
-
-    // Log everything that's coming out of snapshot
-    console.log("this is the first snapshot.val");
-    console.log(snapshot.val());
-    console.log(snapshot.val().name);
-    console.log(snapshot.val().destination);
-    console.log(snapshot.val().time);
-    console.log(snapshot.val().frequency);
-
-    // Change the HTML to reflect
-    $("#name-display").text(snapshot.val().name);
-    $("#email-display").text(snapshot.val().destination);
-    $("#age-display").text(snapshot.val().time);
-    $("#comment-display").text(snapshot.val().frequency);
-
-    // Handle the errors
-   }, function (errorObject) {
-   console.log("Errors handled: " + errorObject.code);
-   
-   })
-
- //**HELP - not working*//                                    
+                                 
 database.ref().on("child_added", function (snapshot) {
-    var sv = snapshot.val();
-    console.log('this is the second snapshot.val');
-    console.log(sv.name);
-    console.log(sv.destination);
-    console.log(sv.time);
-    console.log(sv.frequency);
-
-    $("#name-input").text(sv.name);
-    $("#destination-input").text(sv.destination);
-    $("#trainTime-input").text(sv.time);
-    $("#frequency-input").text(sv.frequency);
-
-    var newRow=$("<tr>");
-   newRow.html("<td>" + sv.name + "</td>" + "<td>" + sv.destination + "</td>" + "<td>" + sv.time + "</td>" + "<td>" + sv.frequency + "</td>")
+  
+    var trainName= snapshot.val().name;
+    var trainDestination= snapshot.val().destination;
+    var trainTime= snapshot.val().time;
+    var trainFrequency= snapshot.val().frequency;
+    
+    $("#trainTable > tbody").append(
+        $("<tr>").append(
+            $("<td>").text(trainName), 
+            $("<td>").text(trainDestination), 
+            $("<td>").text(trainTime), 
+            $("<td>").text(trainFrequency), 
+        )
+    )
 
 });
