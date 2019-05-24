@@ -21,7 +21,7 @@ var frequency = "";
 // Capture Button Click
 $("#submit").on("click", function (event) {
     // Don't refresh the page!
-    // event.preventDefault();
+    event.preventDefault();
 
     name = $("#name-input").val().trim();
     destination = $("#destination-input").val().trim();
@@ -34,12 +34,15 @@ $("#submit").on("click", function (event) {
         time: time,
         frequency: frequency
     });
+    $("#tbody").append(newRow);
 
 });
 // Firebase watcher + initial loader HINT: .on("value")
+
 database.ref().on("value", function (snapshot) {
 
     // Log everything that's coming out of snapshot
+    console.log("this is the first snapshot.val");
     console.log(snapshot.val());
     console.log(snapshot.val().name);
     console.log(snapshot.val().destination);
@@ -53,24 +56,26 @@ database.ref().on("value", function (snapshot) {
     $("#comment-display").text(snapshot.val().frequency);
 
     // Handle the errors
-}, function (errorObject) {
-    console.log("Errors handled: " + errorObject.code);
+   }, function (errorObject) {
+   console.log("Errors handled: " + errorObject.code);
+   
+   })
+
+ //**HELP - not working*//                                    
+database.ref().on("child_added", function (snapshot) {
+    var sv = snapshot.val();
+    console.log('this is the second snapshot.val');
+    console.log(sv.name);
+    console.log(sv.destination);
+    console.log(sv.time);
+    console.log(sv.frequency);
+
+    $("#name-input").text(sv.name);
+    $("#destination-input").text(sv.destination);
+    $("#trainTime-input").text(sv.time);
+    $("#frequency-input").text(sv.frequency);
+
+    var newRow=$("<tr>");
+   newRow.html("<td>" + sv.name + "</td>" + "<td>" + sv.destination + "</td>" + "<td>" + sv.time + "</td>" + "<td>" + sv.frequency + "</td>")
+
 });
-
-// database.ref().on("child_added", function (snapshot) {
-//     var sv = snapshot.val();
-//     console.log(sv.Name);
-//     console.log(sv.Role);
-//     console.log(sv.StartDate);
-//     console.log(sv.MonthlyRate);
-
-//     // $("#exampInputName").text(sv.employeeName);
-//     // $("#companyRole").text(sv.companyRole);
-//     // $("#startDate").text(sv.startDate);
-//     // $("#monthlyRate").text(sv.monthlyRate);
-
-//     var newRow=$("<tr>");
-//    newRow.html("<td>" + sv.Name + "</td>" + "<td>" + sv.Role + "</td>" + "<td>" + sv.StartDate + "</td>" + "<td>" + sv.MonthlyRate + "</td>")
-
-//     $("#tbody").append(newRow);
-//  })
