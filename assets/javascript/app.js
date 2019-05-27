@@ -20,8 +20,10 @@ var frequency = "";
 
 // Capture Button Click
 $("#submit").on("click", function (event) {
+   
     // Don't refresh the page!
     event.preventDefault();
+    
 
     name = $("#name-input").val().trim();
     destination = $("#destination-input").val().trim();
@@ -40,11 +42,13 @@ $("#submit").on("click", function (event) {
                 frequency
             });
         }
-});
-
+        $("#name-input").val("");  
+        $("#destination-input").val("");  
+        $("#trainTime-input").val("");  
+        $("#frequency-input").val("");  
+    });
                                  
 database.ref().on("child_added", function (snapshot) {
-  
     var trainName= snapshot.val().name;
     var trainDestination= snapshot.val().destination;
     var trainTime= snapshot.val().time;
